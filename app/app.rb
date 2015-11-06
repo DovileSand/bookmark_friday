@@ -5,8 +5,18 @@ ENV['RACK_ENV'] ||= 'development'
 
 class DataRecorder < Sinatra::Base
 
-  get '/'do
-    redirect :links
+  get '/' do
+    erb :'links/signup'
+  end
+
+  post '/signup' do
+    User.create(username: params[:username], email: params[:email], password: params[:password])
+    redirect("/confirm/#{params[:username]}")
+  end
+
+  get '/confirm/:username' do
+    @username = params[:username]
+    erb :'links/confirm'
   end
 
   get '/links/new' do

@@ -1,4 +1,3 @@
-
 class Link
   include DataMapper::Resource
 
@@ -9,6 +8,3 @@ class Link
   property :url, String
 
 end
-
-
-# convention over configuration
