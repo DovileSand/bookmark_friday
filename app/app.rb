@@ -14,10 +14,10 @@ class DataRecorder < Sinatra::Base
   end
 
   post '/links' do
-    link = Link.create(title: params[:title],
-                      url: params[:url])
-    tag = Tag.new(name:params[:tag])
-    link.tags << tag
+    link = Link.create(title: params[:title], url: params[:url])
+    params[:tag].split.each do |tag|
+      link.tags << Tag.create(name: tag)
+    end
     link.save
     redirect :links
   end
